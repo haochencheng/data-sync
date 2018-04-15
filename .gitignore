@@ -14,3 +14,10 @@ dist/
 yarn.lock
 bin/
 .DS_Store
+target/
+classes/
+# Package Files #
+*.jar
+*.war
+*.ear
+gradlew/
