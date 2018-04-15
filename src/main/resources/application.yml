@@ -1,0 +1,29 @@
+spring:
+  profiles.active: test
+---
+spring:
+  profiles: test
+  application:
+    name: doc-sync-server
+  datasource:
+    url: jdbc:mysql://localhost:3306/data_sync?useUnicode=true&characterEncoding=utf8&useSSL=false
+    username: demo
+    password: demo
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  mvc:
+    static-path-pattern: /html/**
+    view:
+      prefix: /html/
+      suffix: .html
+  resources:
+    static-locations: classpath:/html/
+  http:
+    multipart:
+      max-file-size: 50Mb
+      max-request-size: 50Mb
+  jpa:
+    show-sql: true
+server:
+    port: 9000
+
+

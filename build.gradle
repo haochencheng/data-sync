@@ -1,0 +1,51 @@
+import java.security.Provider
+
+plugins {
+    id 'org.springframework.boot' version '1.5.10.RELEASE'
+}
+
+apply plugin: 'java'
+apply plugin: 'maven'
+apply plugin: 'idea'
+
+group 'pers.doc.sync'
+version '1.0-SNAPSHOT'
+
+apply plugin: 'java'
+
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+
+jar {
+    baseName = "doc-sync"
+    version = "0.0.1-SNAPSHOT"
+}
+
+bootRun {
+    addResources = true
+}
+
+repositories {
+    mavenLocal()
+    maven { url "http://maven.aliyun.com/nexus/content/groups/public/" }
+    maven{ url "http://maven.aliyun.com/nexus/content/repositories/jcenter"}
+    mavenCentral()
+    maven {
+        url "https://jitpack.io"
+    }
+}
+
+dependencies {
+    compile("org.apache.poi:poi:3.17")
+    compile("org.apache.poi:poi-ooxml:3.17")
+    compile("org.apache.poi:poi-ooxml-schemas:3.17")
+    compile("org.springframework.boot:spring-boot-starter-web") {
+        exclude module: "spring-boot-starter-tomcat"
+    }
+    compile("org.springframework.boot:spring-boot-starter-data-jpa")
+    compile("mysql:mysql-connector-java:6.0.6")
+    compile("org.springframework.boot:spring-boot-starter-tomcat")
+    compile("com.google.guava:guava:24.1-jre")
+    testCompile("org.springframework.boot:spring-boot-starter-test")
+    testCompile("junit:junit:4.12")
+}
