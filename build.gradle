@@ -1,5 +1,3 @@
-import java.security.Provider
-
 plugins {
     id 'org.springframework.boot' version '1.5.10.RELEASE'
 }

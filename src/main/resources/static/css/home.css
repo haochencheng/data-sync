@@ -1,0 +1,36 @@
+.home{
+    width: 100%;
+    height: 100%;
+}
+
+/*home_header*/
+.home_title {
+    color: black;
+    font-size: 22px;
+    display: inline;
+    float: left;
+    margin:25px 0 0 15px;
+}
+.home_userinfo {
+    float: right;
+    margin:35px 25px 0 15px;
+}
+.home_userinfo_span {
+    color: black;
+    cursor: pointer;
+    font-size: 16px;
+    margin: 0 35px 0 0;
+}
+
+/*home_menu*/
+.home_container {
+    height: 100%;
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    width: 100%;
+}
+.home_header{
+    height: 10%;
+    background-color: #48A0F8;
+}

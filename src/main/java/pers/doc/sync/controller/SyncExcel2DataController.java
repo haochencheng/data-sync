@@ -63,7 +63,7 @@ public class SyncExcel2DataController {
 
     @RequestMapping(value = "/home", method = RequestMethod.GET)
     public String toIndex() {
-        return "index";
+        return "home";
     }
 
     @RequestMapping(value = "/", method = RequestMethod.GET)
