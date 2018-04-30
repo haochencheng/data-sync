@@ -15,7 +15,7 @@ sourceCompatibility = 1.8
 targetCompatibility = 1.8
 
 jar {
-    baseName = "doc-sync"
+    baseName = "data-sync"
     version = "0.0.1-SNAPSHOT"
 }
 
@@ -44,6 +44,7 @@ dependencies {
     compile("mysql:mysql-connector-java:6.0.6")
     compile("org.springframework.boot:spring-boot-starter-tomcat")
     compile("com.google.guava:guava:24.1-jre")
+    compile("com.github.crab2died:Excel4J:2.1.3")
     testCompile("org.springframework.boot:spring-boot-starter-test")
     testCompile("junit:junit:4.12")
 }

@@ -1,5 +1,6 @@
 package pers.doc.sync.controller;
 
+import com.github.crab2died.ExcelUtils;
 import org.apache.poi.ss.usermodel.CellType;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
@@ -11,7 +12,9 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import pers.doc.sync.common.ReturnResult;
 import pers.doc.sync.model.HalfYearDataStatistical;
+import pers.doc.sync.model.SchedulingDataSource;
 import pers.doc.sync.repository.HalfYearDataStatisticalRepository;
+import pers.doc.sync.repository.SchedulingDataSourceRepository;
 import pers.doc.sync.util.ExcelUtil;
 
 import javax.annotation.Resource;
@@ -19,6 +22,7 @@ import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 
 @Controller
 public class SyncExcel2DataController {
@@ -28,10 +32,13 @@ public class SyncExcel2DataController {
     @Resource
     HalfYearDataStatisticalRepository halfYearDataStatisticalRepository;
 
+    @Resource
+    SchedulingDataSourceRepository schedulingDataSourceRepository;
 
-    @RequestMapping("/sync/excel")
+
+    @RequestMapping("/sync/excel1")
     @ResponseBody
-    public ReturnResult SyncExcel2Data(@RequestParam("file") MultipartFile excelFile) throws IOException {
+    public ReturnResult SyncExcel2Data1(@RequestParam("file") MultipartFile excelFile) throws IOException {
         logger.info(excelFile.getOriginalFilename());
         Workbook workbook = ExcelUtil.readExcel(excelFile.getInputStream(), excelFile.getOriginalFilename());
         Sheet sheet = workbook.getSheet("半年度");
@@ -58,6 +65,23 @@ public class SyncExcel2DataController {
             halfYearDataStatistical.setTotalAmount(totalAmount.intValue());
         }
         halfYearDataStatisticalRepository.save(halfYearDataStatistical);
+        return ReturnResult.ok();
+    }
+
+    @RequestMapping("/sync/excel")
+    @ResponseBody
+    public ReturnResult SyncExcel2Data(@RequestParam("file") MultipartFile excelFile) throws IOException {
+        logger.info(excelFile.getOriginalFilename());
+        try {
+            List<SchedulingDataSource> schedulingDataSourceList=ExcelUtils.getInstance().readExcel2Objects(excelFile.getInputStream(), SchedulingDataSource.class,0,10,0);
+            logger.info(schedulingDataSourceList.toString());
+            schedulingDataSourceList.forEach((schedulingDataSource) ->
+                schedulingDataSourceRepository.save(schedulingDataSource)
+            );
+        } catch (Exception e) {
+            e.printStackTrace();
+            return ReturnResult.error();
+        }
         return ReturnResult.ok();
     }
 

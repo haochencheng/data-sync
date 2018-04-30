@@ -22,6 +22,9 @@ public class ReturnResult<T> implements Serializable {
     public static ReturnResult ok(){
         return new ReturnResult(ErrorCodeConstant.SUCCESS_CODE);
     }
+    public static ReturnResult error(){
+        return new ReturnResult(ErrorCodeConstant.ERROR_CODE);
+    }
 
     public int getStatus() {
         return status;
